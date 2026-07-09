@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 | 宜蘭小旅行 ‧ 旅遊手冊</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+        body {
+            margin: 0; padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+            background-color: #f4f0ea; color: #4a3e3d; line-height: 1.6;
+        }
+        .wrapper { max-width: 800px; margin: 0 auto; background: #ffffff; box-shadow: 0 4px 25px rgba(0,0,0,0.06); min-height: 100vh; }
+        .hero-banner { background-color: #ded0be; color: #5c4d4a; padding: 50px 30px; text-align: center; border-bottom: 4px solid #c8b9a6; }
+        .hero-banner h1 { margin: 0; font-size: 26pt; font-weight: 700; letter-spacing: 3px; }
+        .hero-banner p { margin: 10px 0 0 0; font-size: 13pt; letter-spacing: 1px; opacity: 0.9; }
+        .trip-meta { margin-top: 20px; font-size: 11pt; color: #7a6a67; background: rgba(255,255,255,0.6); padding: 8px 18px; display: inline-block; border-radius: 20px; font-weight: bold; }
+        
+        .nav-links { text-align: center; padding: 15px 10px; background: #fbfaf7; border-bottom: 1px solid #eae5dc; position: sticky; top: 0; z-index: 100; }
+        .nav-links a { color: #8c7662; text-decoration: none; margin: 0 12px; font-size: 11pt; font-weight: bold; }
+        .nav-links a:hover { text-decoration: underline; color: #5c4d4a; }
+        
+        .content-padding { padding: 35px 25px; }
+        h2 { font-size: 16pt; color: #5c4d4a; border-left: 5px solid #c8b9a6; padding-left: 12px; margin-top: 40px; margin-bottom: 18px; }
+        
+        .info-card { background-color: #faf8f5; border: 1px solid #ede8e0; border-radius: 8px; padding: 18px 20px; margin-bottom: 22px; }
+        .info-card-title { font-weight: bold; color: #8c7662; margin-bottom: 12px; font-size: 12pt; display: flex; align-items: center; }
+        
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 10.5pt; }
+        th, td { border: 1px solid #ede8e0; padding: 12px 14px; text-align: left; vertical-align: top; }
+        th { background-color: #f4efe8; color: #5c4d4a; font-weight: 600; }
+        tr:nth-child(even) { background-color: #fdfcfb; }
+        
+        ul { padding-left: 22px; margin: 8px 0; }
+        li { margin-bottom: 8px; font-size: 11pt; }
+        
+        .badge { background-color: #e6dfd5; color: #6e5d5a; padding: 2px 7px; border-radius: 4px; font-size: 9pt; font-weight: bold; margin-right: 6px; display: inline-block; }
+        .badge-accent { background-color: #c8b9a6; color: #ffffff; }
+        .badge-alert { background-color: #dfc2b3; color: #7c5341; }
+        
+        .flex-grid { display: flex; gap: 20px; flex-wrap: wrap; }
+        .flex-col { flex: 1; min-width: 280px; }
+        
+        .footer { text-align: center; padding: 35px; font-size: 10pt; color: #b0a596; border-top: 1px solid #eae5dc; background: #fbfaf7; letter-spacing: 1px; }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <div class="hero-banner">
+        <h1>HELLO YILAN ‧ 宜蘭小旅行</h1>
+        <p>秋日包棟慶典 ‧ 歡唱棋牌奢華假期</p>
+        <div class="trip-meta">📅 日期：2026/10/03 (六) - 10/04 (日) </div>
+    </div>
+
+    <div class="nav-links">
+        <a href="#villa-info">🏡 住宿交通</a>
+        <a href="#room-alloc">🛏️ 完美分房</a>
+        <a href="#itinerary">🗓️ 行程規劃</a>
+        <a href="#luggage">🧳 行李須知</a>
+        <a href="#accounting">💰 記帳明細</a>
+    </div>
+
+    <div class="content-padding">
+        
+        <div id="villa-info">
+            <h2>🏡 住宿資訊 & 🚗 車表編排</h2>
+            <div class="info-card">
+                <div class="info-card-title">📍 包棟民宿：安安好宅</div>
+                <ul>
+                    <li><strong>民宿地址</strong>：宜蘭縣礁溪鄉玉龍路二段229巷22號</li>
+                    <li><strong>聯絡電話</strong>：0985529256</li>
+                    <li><strong>入住時間</strong>：最早進房 15:00 ｜ 最晚退房 11:00</li>
+                    <li><strong>免費提供</strong>：精緻早餐、美味泡麵、各式飲料、豐富零食。</li>
+                    <li><strong>頂級配備</strong>：專業歡唱 KTV 設備、歡樂戲水區、烤肉區、電動麻將桌、德州撲克桌（含籌碼）。</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <div class="info-card-title">🚗 車乘分配表</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 30%;">車輛名稱</th>
+                            <th>乘車人員名單</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>邱菲特 車</strong></td>
+                            <td>邱董、佳佳</td>
+                        </tr>
+                        <tr>
+                            <td><strong>水梨家族 車</strong></td>
+                            <td>泰瑞、思妤、水梨</td>
+                        </tr>
+                        <tr>
+                            <td><strong>奇異果家族 車</strong></td>
+                            <td>譚琦、信億、KIWI</td>
+                        </tr>
+                        <tr>
+                            <td><strong>晴天蔚藍 車</strong></td>
+                            <td>芷晴、政蔚</td>
+                        </tr>
+                        <tr>
+                            <td><strong>温導 車</strong></td>
+                            <td>（自由入座 / 隨機調度）</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="room-alloc">
+            <h2>🛏️ 16大3小 完美房間分配方案</h2>
+            <p>本次為舒適包棟，額外<strong>加了 2 張單人床墊</strong>。已依據大家的限制（雙人房留給有小孩的朋友）進行最舒適的微調：</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">樓層與房型</th>
+                        <th style="width: 25%;">床位配置</th>
+                        <th style="width: 50%;">實際入住名單與貼心備註</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1F 安境雙人房</strong></td>
+                        <td>1張雙人床</td>
+                        <td>🥝 <strong>奇異果 一家三口</strong> (2大1寶)<br><small style="color:#8c7662;">★ 貼心保留：住一樓免搬推車，泡奶拿零食最方便！</small></td>
+                    </tr>
+                    <tr>
+                        <td><strong>2F 洄居雙人房</strong></td>
+                        <td>1張雙人床</td>
+                        <td>🥑 <strong>菲菲 一家三口</strong> (2大1寶)<br><small style="color:#8c7662;">★ 貼心保留：附設頂級大浴缸，幫寶寶洗澡超級輕鬆！</small></td>
+                    </tr>
+                    <tr>
+                        <td><strong>2F 雲煙四人房</strong></td>
+                        <td>2張雙人床</td>
+                        <td>🍐 <strong>水梨 一家三口</strong> ＋ 👩🏻 <strong>莉莉</strong> (3大1寶)<br><small style="color:#8c7662;">★ 舒適大空間：一張雙人床睡水梨一家，另一張大床留給單身女生莉莉，空間超大適合寶寶爬行。</small></td>
+                    </tr>
+                    <tr>
+                        <td><strong>3F 宅嶼雙人房</strong></td>
+                        <td>1雙 ＋ <span class="badge badge-accent">1單人墊</span></td>
+                        <td>👦🏻 <strong>蒟蒻、齊哥、育翔</strong> (3大)<br><small style="color:#8c7662;">★ 好哥們通宵房：2人睡 Queen size 加大雙人床，1人睡加床墊。打牌暢聊首選！</small></td>
+                    </tr>
+                    <tr>
+                        <td><strong>3F 蝕光四人房</strong></td>
+                        <td>2雙 ＋ <span class="badge badge-accent">1單人墊</span></td>
+                        <td>🌶️ <strong>辣辣夫妻</strong> ＋ 🍊 <strong>佳佳情侶</strong> ＋ 🍒 <strong>兒萱情侶</strong> (6大)<br><small style="color:#8c7662;">★ 熱鬧情侶/新婚房：兩張加大雙人床 + 1張地上加床墊，三對伴侶開趴最溫馨，現場可再微調床位分配唷！</small></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="itinerary">
+            <h2>🗓️ 兩天一夜 宜蘭小旅行行程表</h2>
+            <p style="margin-top:-10px; color:#888;">👗 <strong>DRESS CODE：期待大家穿出最亮眼的默契穿搭！</strong></p>
+            <div class="flex-grid">
+                <div class="flex-col">
+                    <div class="info-card" style="border-top: 4px solid #c8b9a6;">
+                        <div class="info-card-title">✨ DAY 1 ‧ 10/03 (六)</div>
+                        <ul>
+                            <li><strong>10:00 (暫定)</strong> ｜ 歡樂出發宜蘭！</li>
+                            <li><strong>12:30 (集合)</strong> ｜ 享用在地午餐</li>
+                            <li><strong>13:30 - 15:00</strong> ｜ 自由行程 / 漫步宜蘭</li>
+                            <li><strong>15:00 後</strong> ｜ <strong>抵達「安安好宅」Check-in！</strong></li>
+                            <li><strong>15:30 - 18:00</strong> ｜ 民宿休息，開啟 KTV 歡唱、麻將、德州撲克大賽。</li>
+                            <li><strong>18:00 ───</strong> ｜ <strong>大快朵頤！享用代烤烤肉晚餐 🍖</strong></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="flex-col">
+                    <div class="info-card" style="border-top: 4px solid #c8b9a6;">
+                        <div class="info-card-title">✨ DAY 2 ‧ 10/04 (日)</div>
+                        <ul>
+                            <li><strong>09:00 (暫定)</strong> ｜ 悠閒享用民宿早餐</li>
+                            <li><strong>11:00 前</strong> ｜ 辦理退房，揮別安安好宅</li>
+                            <li><strong>11:00 - 12:30</strong> ｜ <strong>自由特色景點：傳藝園區、橘之鄉體驗 🍊</strong></li>
+                            <li><strong>12:30 ───</strong> ｜ 享用美味午餐</li>
+                            <li><strong>14:00 - 15:30</strong> ｜ 採買宜蘭在地特色伴手禮</li>
+                            <li><strong>16:00 ───</strong> ｜ 返家，帶著滿滿回憶避開車潮</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="luggage">
+            <h2>🧳 行李清單 & 行前須知</h2>
+            <div class="info-card" style="background-color: #fdfaf7; border-left: 4px solid #dfc2b3;">
+                <div class="info-card-title" style="color: #7c5341;">⚠️ 經手冊確認！重要星號提醒</div>
+                <p style="margin: 0; font-size: 10.5pt; color: #7c5341; font-weight: bold;">
+                    「安安好宅」僅提供毛巾、浴巾、沐浴乳、洗髮精及吹風機。為了響應環保，民宿【未提供一次性備品】！請大家務必自己攜帶：牙刷、牙膏、浴帽、刮鬍刀、棉花棒等。
+                </p>
+            </div>
+            
+            <div class="flex-grid">
+                <div class="flex-col">
+                    <div class="info-card">
+                        <div class="info-card-title">👜 隨身與重要物品</div>
+                        <ul>
+                            <li>個人重要證件、錢包</li>
+                            <li>手機充電器、行動電源</li>
+                            <li>雨傘 / 隨身折疊傘 ☔</li>
+                            <li>隨身水壺 / 保溫瓶</li>
+                            <li>耳機及個人常用藥品、口罩</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="flex-col">
+                    <div class="info-card">
+                        <div class="info-card-title">👕 衣物與養護用品</div>
+                        <ul>
+                            <li>換洗衣物 & 貼身衣物 (1-2套)</li>
+                            <li>襪子、輕薄外套（防早晚溫差）</li>
+                            <li>輕便拖鞋、太陽眼鏡 😎</li>
+                            <li><span class="badge badge-accent">玩水必備</span> 想玩水的人記得帶泳衣泳褲！</li>
+                            <li>防曬乳、身體乳、防蚊用品 🦟</li>
+                            <li>個人彩妝與基礎保養用品</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="accounting">
+            <h2>💰 旅遊小管家 ‧ 記帳明細</h2>
+            <div class="info-card">
+                <p style="margin-top: 0; font-style: italic; color: #888;">「常覺得我是魔術師，都會把錢錢變不見。難道我會魔法？但是錢變不回來...🧙‍♂️」</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>預估日期</th>
+                            <th>消費項目明細</th>
+                            <th style="text-align: right;">每人金額</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>10/03 - 10/04</td>
+                            <td>宜蘭安安好宅 VILLA 包棟住宿費</td>
+                            <td style="text-align: right; font-weight: bold; color: #8c7662;">$2,375 元</td>
+                        </tr>
+                        <tr>
+                            <td>10/03 (六) 晚上</td>
+                            <td>豪華代烤烤肉晚餐饗宴</td>
+                            <td style="text-align: right; font-weight: bold; color: #8c7662;">$1,500 元</td>
+                        </tr>
+                        <tr style="background-color: #faf6f0; font-weight: bold;">
+                            <td>TOTAL</td>
+                            <td>目前預估統計 (不含自費與其餘小額餐費)</td>
+                            <td style="text-align: right; font-size: 12pt; color: #5c4d4a;">$3,875 元 / 人</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    
+    <div class="footer">2026 宜蘭小旅行 ‧ 歡樂假期專屬手冊</div>
+</div>
+</body>
+</html>
