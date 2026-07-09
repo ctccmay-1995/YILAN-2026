@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>宜蘭小旅行 ‧ 數位手冊</title>
+    <style>
+        :root {
+            --bg-color: #F9F6F0;
+            --card-bg: #FFFFFF;
+            --text-main: #2C2A29;
+            --text-sub: #7A7471;
+            --primary: #6E7E65; /* 抹茶綠 */
+            --accent-orange: #D9A05B; /* 柑橘橘 */
+            --accent-red: #B86B5C; /* 肉桂紅 */
+            --border-color: #E6E1DA;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body {
+            margin: 0; padding: 0 0 70px 0;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+            font-size: 16px;
+        }
+
+        /* 頂部標題 */
+        .app-header {
+            background: var(--card-bg);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0; z-index: 90;
+        }
+        .app-header h1 { margin: 0; font-size: 1.3rem; font-weight: 600; letter-spacing: 1px; }
+        .app-header p { margin: 5px 0 0 0; font-size: 0.85rem; color: var(--text-sub); }
+
+        /* 分頁切換機制 */
+        .app-page { display: none; padding: 16px; animation: fadeIn 0.3s ease; }
+        .app-page.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* 日式極簡卡片 */
+        .section-title { font-size: 1.1rem; font-weight: 600; margin: 24px 0 12px 0; color: var(--text-main); display: flex; align-items: center; gap: 8px; }
+        .weather-box { background: #EBF2EA; color: var(--primary); padding: 10px 14px; border-radius: 8px; font-size: 0.85rem; font-weight: 500; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; }
+        
+        .trip-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 14px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            position: relative;
+        }
+        .card-time { font-size: 0.85rem; font-weight: bold; color: var(--primary); margin-bottom: 6px; }
+        .card-title { font-size: 1.05rem; font-weight: 600; margin-bottom: 6px; }
+        .card-desc { font-size: 0.9rem; color: var(--text-sub); margin-bottom: 12px; line-height: 1.5; }
+        
+        /* 標籤設計 */
+        .badge { display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; margin-right: 4px; margin-bottom: 6px; }
+        .badge-food { background: #FDF1E6; color: var(--accent-orange); }
+        .badge-spot { background: #EBF2EA; color: var(--primary); }
+        .badge-alert { background: #FCEFEF; color: var(--accent-red); }
+
+        /* 導航按鈕 */
+        .btn-nav {
+            display: inline-flex; align-items: center; gap: 4px;
+            background: #F4F1EC; color: var(--text-main);
+            text-decoration: none; padding: 6px 12px; border-radius: 6px;
+            font-size: 0.8rem; font-weight: 500; border: 1px solid var(--border-color);
+        }
+
+        /* 互動式打勾清單 */
+        .todo-item { display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid #F1EDE6; }
+        .todo-item input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--primary); margin-right: 12px; }
+        .todo-item.checked span { text-decoration: line-through; color: #BBB; }
+
+        /* 表格與記帳樣式 */
+        .info-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        .info-table th, .info-table td { padding: 12px; border-bottom: 1px solid var(--border-color); text-align: left; }
+        .info-table th { background: #F4F1EC; font-weight: 600; }
+        .total-box { background: #2C2A29; color: #FFF; padding: 16px; border-radius: 10px; text-align: center; margin-top: 16px; font-size: 1.1rem; font-weight: bold; }
+
+        /* 底部原生導覽列 */
+        .bottom-nav {
+            position: fixed; bottom: 0; left: 0; right: 0; height: 60px;
+            background: var(--card-bg); border-top: 1px solid var(--border-color);
+            display: flex; justify-content: space-around; align-items: center;
+            z-index: 100;
+        }
+        .nav-item {
+            background: none; border: none; color: var(--text-sub);
+            font-size: 0.75rem; font-weight: 500; display: flex; flex-direction: column; align-items: center; gap: 4px; width: 25%;
+        }
+        .nav-item.active { color: var(--primary); font-weight: bold; }
+        .nav-icon { font-size: 1.2rem; }
+    </style>
+</head>
+<body>
+
+    <!-- 頂部共用 Header -->
+    <div class="app-header">
+        <h1>2026 宜蘭小旅行 ‧ 數位工具</h1>
+        <p>10/03 (六) - 10/04 (日) ‧ 16大3小專屬</p>
+    </div>
+
+    <!-- 頁面一：每日行程 -->
+    <div id="page-itinerary" class="app-page active">
+        <div class="section-title">📅 DAY 1 (10/03 六)</div>
+        <div class="weather-box">
+            <span>📍 礁溪鄉即時天氣預報</span>
+            <span id="weather-d1">☀️ 26°C (多雲時晴，降雨率 10%)</span>
+        </div>
+
+        <div class="trip-card">
+            <div class="card-time">10:00</div>
+            <div class="card-title">🚗 集合出發</div>
+            <div class="card-desc">依各車表編排開車前往宜蘭。<br><b>邱菲特車</b>(邱董、佳佳) | <b>水梨車</b>(泰瑞一家、思妤) | <b>奇異果車</b>(譚琦一家、信億) | <b>晴天蔚藍車</b>(芷晴、政蔚)。</div>
+        </div>
+
+        <div class="trip-card">
+            <div class="card-time">12:30</div>
+            <div class="card-title">🍽️ 員山在地午餐</div>
+            <div class="card-desc">
+                <span class="badge badge-food">必吃美食</span><b>員山魚丸米粉</b><br>
+                攻略提示：湯頭由油蔥與大骨熬煮，粗米粉吸飽湯汁，推薦加點豆腐與手工魚丸。
+            </div>
+            <a href="#" class="btn-nav" data-location="宜蘭員山魚丸米粉">🗺️ 導航</a>
+        </div>
+
+        <div class="trip-card">
+            <div class="card-time">15:00 後</div>
+            <div class="card-title">🏡 安安好宅 Check-in</div>
+            <div class="card-desc">
+                抵達漂亮別墅！開啟 KTV 歡唱、電動麻將與德州撲克大賽。<br>
+                <span class="badge badge-alert">重要分房</span> 
+                1F雙人: 奇異果一家(免搬推車) | 2F雙人: 菲菲一家(附浴缸) | 2F四人: 邱董、李佳、兒萱、温導、齊哥、蒟蒻 | 3F雙人: 晴天蔚藍 | 3F四人: 水梨一家、莉莉、阿翔。
+            </div>
+            <a href="#" class="btn-nav" data-location="安安好宅">🗺️ 導航</a>
+        </div>
+
+        <div class="trip-card">
+            <div class="card-time">18:00</div>
+            <div class="card-title">🍖 豪華代烤烤肉晚餐</div>
+            <div class="card-desc">無需動手！專業代烤服務在民宿烤肉區開烤，享受放鬆小酌夜晚。</div>
+        </div>
+
+        <div class="section-title">📅 DAY 2 (10/04 日)</div>
+        <div class="weather-box">
+            <span>📍 五結鄉即時天氣預報</span>
+            <span id="weather-d2">☁️ 25°C (舒適陰天)</span>
+        </div>
+
+        <div class="trip-card">
+            <div class="card-time">09:00 - 11:00</div>
+            <div class="card-title">🍳 享用早餐 & 退房</div>
+            <div class="card-desc">享用民宿提供的精緻早餐、泡麵冷飲，並於 11:00 前辦理退房。</div>
+        </div>
+
+        <div class="trip-card">
+            <div class="card-time">11:30</div>
+            <div class="card-title">🏺 國立傳統藝術中心 (傳藝園區)</div>
+            <div class="card-desc">
+                <span class="badge badge-spot">必玩景點</span>非常適合推嬰兒車漫步的紅磚老街。<br>
+                攻略提示：推薦去臨水街搭乘<b>古風畫舫船</b>遊河，單程約 15 分鐘。
+            </div>
+            <a href="#" class="btn-nav" data-location="國立傳統藝術中心">🗺️ 導航</a>
+        </div>
+
+        <div class="trip-card">
+            <div class="card-time">13:30</div>
+            <div class="card-title">🍊 橘之鄉蜜餞形象館</div>
+            <div class="card-desc">
+                <span class="badge badge-spot">網美活動</span>金桔蜜餞觀光工廠。<br>
+                <span class="badge badge-food">必買伴手禮</span><b>生津金棗茶、冰釀蜜餞</b>。巨大桌椅咖啡廳超好拍！
+            </div>
+            <a href="#" class="btn-nav" data-location="橘之鄉蜜餞形象館">🗺️ 導航</a>
+        </div>
+
+        <div class="trip-card">
+            <div class="card-time">15:00</div>
+            <div class="card-title">🛍️ 伴手禮採買：奕順軒</div>
+            <div class="card-desc">
+                <span class="badge badge-food">必買伴手禮</span><b>奶凍卷（芋頭/草莓口味）、切達乳酪狀元餅</b>。
+            </div>
+            <a href="#" class="btn-nav" data-location="奕順軒 礁溪店">🗺️ 導航</a>
+        </div>
+    </div>
+
+    <!-- 頁面二：行李打勾 -->
+    <div id="page-luggage" class="app-page">
+        <div class="section-title">🧳 行前打包檢查表</div>
+        <div class="trip-card" style="border-left: 4px solid var(--accent-red);">
+            <small style="color:var(--accent-red); font-weight:bold;">⚠️ 民宿環保告示：僅提供毛浴巾與洗沐用品，【未提供一次性備品】！</small>
+        </div>
+        <div class="trip-card">
+            <div class="todo-item"><input type="checkbox"><span>🦷 牙刷、牙膏、個人盥洗備品</span></div>
+            <div class="todo-item"><input type="checkbox"><span>📱 手機充電線、行動電源</span></div>
+            <div class="todo-item"><input type="checkbox"><span>🩱 泳衣、泳褲（要玩水的人必帶）</span></div>
+            <div class="todo-item"><input type="checkbox"><span>🧥 輕薄外套（防夜間溫差）</span></div>
+            <div class="todo-item"><input type="checkbox"><span>🩴 輕便拖鞋、太陽眼鏡</span></div>
+            <div class="todo-item"><input type="checkbox"><span>👶 寶寶個人奶粉、尿布與備品</span></div>
+            <div class="todo-item"><input type="checkbox"><span>🧴 防曬乳、防蚊液</span></div>
+        </div>
+    </div>
+
+    <!-- 頁面三：住宿與備品 -->
+    <div id="page-villa" class="app-page">
+        <div class="section-title">🏡 住宿與貼心備品資訊</div>
+        <div class="trip-card">
+            <div class="card-title">安安好宅 Anan Villa</div>
+            <div class="card-desc">
+                <b>地址：</b>宜蘭縣礁溪鄉玉龍路二段229巷22號<br>
+                <b>電話：</b>0985529256<br>
+                <span class="badge badge-spot">重要預約代號</span> <b>包棟編號：ANAN-20261003</b>
+            </div>
+            <a href="#" class="btn-nav" data-location="宜蘭縣礁溪鄉玉龍路二段229巷22號">🗺️ 開啟 Google 地圖導航</a>
+        </div>
+        <div class="trip-card">
+            <div class="card-title">👶 已幫爸爸媽媽預約備品</div>
+            <div class="card-desc">
+                已請民宿提前在房間準備好：<br>
+                <b>✓ 嬰兒澡盆 & 小椅子</b><br>
+                <b>✓ 蒸汽奶瓶消毒鍋</b>
+            </div>
+        </div>
+    </div>
+
+    <!-- 頁面四：動態記帳 -->
+    <div id="page-accounting" class="app-page">
+        <div class="section-title">💰 旅遊預算與記帳</div>
+        <div class="trip-card">
+            <table class="info-table">
+                <thead>
+                    <tr><th>項目</th><th>預估金額</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>安安好宅 包棟住宿費</td><td>$2,375 / 人</td></tr>
+                    <tr><td>豪華專業代烤烤肉費</td><td>$1,500 / 人</td></tr>
+                    <tr><td>其餘自費行程餐飲</td><td>現場結算</td></tr>
+                </tbody>
+            </table>
+            <div class="total-box">當前基本固定支出：$3,875 / 人</div>
+        </div>
+    </div>
+
+    <!-- 底部行動裝置原生導覽列 -->
+    <div class="bottom-nav">
+        <button class="nav-item active" onclick="switchPage('page-itinerary', this)">
+            <span class="nav-icon">🗓️</span>行程
+        </button>
+        <button class="nav-item" onclick="switchPage('page-luggage', this)">
+            <span class="nav-icon">🧳</span>行李
+        </button>
+        <button class="nav-item" onclick="switchPage('page-villa', this)">
+            <span class="nav-icon">🏡</span>住宿
+        </button>
+        <button class="nav-item" onclick="switchPage('page-accounting', this)">
+            <span class="nav-icon">💰</span>記帳
+        </button>
+    </div>
+
+    <script>
+        // 1. 分頁切換邏輯
+        function switchPage(pageId, button) {
+            document.querySelectorAll('.app-page').forEach(page => page.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(pageId).classList.add('active');
+            button.classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        // 2. 自動生成 Google Maps 導航連結
+        document.querySelectorAll('.btn-nav').forEach(btn => {
+            const location = btn.getAttribute('data-location');
+            if (location) {
+                btn.setAttribute('href', `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`);
+                btn.setAttribute('target', '_blank');
+            }
+        });
+
+        // 3. 行李打勾互動
+        document.querySelectorAll('.todo-item input').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    this.parentElement.classList.add('checked');
+                } else {
+                    this.parentElement.classList.remove('checked');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
